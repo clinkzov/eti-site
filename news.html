@@ -53,7 +53,7 @@
 
         main { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
         
-        /* Верхний блок-уведомление о первоисточнике */
+        /* Главный блок для перехода в ВК */
         .info-announcement {
             background: rgba(255, 255, 255, 0.02);
             border-radius: 16px; padding: 25px; margin-bottom: 40px;
@@ -68,42 +68,49 @@
             text-decoration: none; color: #fff; background: var(--accent-blue);
             padding: 12px 24px; border-radius: 8px; font-weight: 600;
             white-space: nowrap; font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(0, 113, 227, 0.3);
         }
-        .source-link:hover { background: #005bb5; }
+        .source-link:hover { background: #005bb5; transform: translateY(-1px); }
 
-        /* Сетка для текстовых блоков (textbox) */
+        /* Сетка для полноценных карточек новостей */
         .news-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px;
         }
 
-        .news-textbox {
-            background: var(--card-bg); border-radius: 14px; padding: 25px;
+        .news-card {
+            background: var(--card-bg); border-radius: 14px; overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 1px solid rgba(255, 255, 255, 0.04);
-            display: flex; flex-direction: column; min-height: 300px;
+            display: flex; flex-direction: column;
         }
 
-        .news-textbox:hover { 
+        .news-card:hover { 
             border-color: rgba(0, 242, 254, 0.2); 
             box-shadow: 0 12px 35px rgba(0, 242, 254, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .news-img {
+            width: 100%; height: 210px; object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background-color: #1a233d;
+        }
+
+        .news-content {
+            padding: 25px; display: flex; flex-direction: column; flex-grow: 1;
         }
         
-        .textbox-date { font-size: 0.8rem; color: var(--neon-glow); margin-bottom: 12px; letter-spacing: 1px; font-weight: 600; text-transform: uppercase; }
-        .textbox-text { font-size: 0.95rem; color: var(--text-main); margin-bottom: 20px; line-height: 1.6; text-align: justify; flex-grow: 1; }
+        .card-date { font-size: 0.8rem; color: var(--neon-glow); margin-bottom: 12px; letter-spacing: 1px; font-weight: 600; text-transform: uppercase; }
+        .card-title { font-size: 1.2rem; color: #fff; margin: 0 0 10px 0; font-weight: 700; line-height: 1.4; }
+        .card-text { font-size: 0.95rem; color: var(--text-main); margin-bottom: 0; line-height: 1.6; text-align: justify; }
 
-        .textbox-action {
-            text-decoration: none; color: var(--text-muted); font-size: 0.85rem;
-            font-weight: 600; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 12px;
-            display: inline-flex; align-items: center; justify-content: space-between;
-        }
-        .textbox-action:hover { color: #fff; }
-
-        /* Оптимизация под мобильные телефоны */
+        /* Адаптивность для мобильных телефонов */
         @media (max-width: 768px) {
             nav { flex-direction: column; gap: 4px; }
             nav a { width: 100%; text-align: center; padding: 12px; }
             .info-announcement { flex-direction: column; text-align: center; gap: 20px; }
             .source-link { width: 100%; }
             .news-grid { grid-template-columns: 1fr; gap: 20px; }
+            .news-card { border-radius: 12px; }
         }
         footer { background-color: #05070f; color: var(--text-muted); text-align: center; padding: 30px 20px; margin-top: 80px; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.02); }
     </style>
@@ -113,7 +120,7 @@
     <header>
         <div class="header-container">
             <div class="logo-container">
-                <img src="https://lh5.googleusercontent.com/proxy/Np35Go7GCO1S3sTQyDR7W7uH_HahaG17E_zWn0Pouec2dVHYo44QTrf4IZ8AlFRQqAwMhvlyH_AWIPqZ-iJ0UgYxw-X0lBVuHXTuKE8G" alt="Логотип ЭТИ СГТУ">
+                <img src="https://techn.sstu.ru/images/logo_eti.png" alt="Логотип ЭТИ СГТУ">
             </div>
             <nav>
                 <a href="index.html">Главная</a>
@@ -127,39 +134,39 @@
     <main>
         <div class="info-announcement">
             <div class="announcement-details">
-                <h3>Официальный информационный источник</h3>
-                <p>Актуальные сведения о внутренних мероприятиях, нормативных актах и учебном процессе ЭТИ СГТУ.</p>
+                <h3>Официальное сообщество ВКонтакте</h3>
+                <p>Для просмотра интерактивных материалов, обсуждений и оперативных объявлений перейдите в верифицированную группу.</p>
             </div>
-            <a href="https://vk.com/eti_sstu" target="_blank" class="source-link">Перейти в группу VK</a>
+            <a href="https://vk.com/eti_sstu" target="_blank" class="source-link">Открыть группу ВК</a>
         </div>
 
         <div class="news-grid">
             
-            <div class="news-textbox">
-                <div class="textbox-date">10 июня 2026</div>
-                <div class="textbox-text">Приемная комиссия Энгельсского технологического института информирует о готовности к началу приема заявлений от абитуриентов. С 20 июня начинается официальный прием документов на программы среднего профессионального образования (СПО) и высшего образования. Доступна подача заявлений через личный кабинет на сайте СГТУ и портал «Госуслуги».</div>
-                <a href="https://vk.com/eti_sstu" target="_blank" class="textbox-action">
-                    <span>Перейти к первоисточнику</span>
-                    <span>→</span>
-                </a>
+            <div class="news-card">
+                <img src="https://techn.sstu.ru/images/pages/od_eti2.jpg" class="news-img" alt="Приемная комиссия">
+                <div class="news-content">
+                    <div class="card-date">10 июня 2026</div>
+                    <h4 class="card-title">Старт приемной кампании 2026</h4>
+                    <p class="card-text">Приемная комиссия Энгельсского технологического института информирует о готовности к началу приема заявлений от абитуриентов. С 20 июня начинается официальный прием документов на программы среднего профессионального образования (СПО) и высшего образования. Доступна подача заявлений через личный кабинет на сайте СГТУ и портал «Госуслуги».</p>
+                </div>
             </div>
 
-            <div class="news-textbox">
-                <div class="textbox-date">25 мая 2026</div>
-                <div class="textbox-text">Студенты первого курса отделений СПО успешно завершили цикл промежуточных отчетов по индивидуальным исследовательским проектам. Особое внимание в рамках экспертных сессий было уделено работам в области прикладной экологии, промышленной химии и современным методам утилизации твердых коммунальных отходов.</div>
-                <a href="https://vk.com/eti_sstu" target="_blank" class="textbox-action">
-                    <span>Перейти к первоисточнику</span>
-                    <span>→</span>
-                </a>
+            <div class="news-card">
+                <img src="https://techn.sstu.ru/images/pages/gl_korp.jpg" class="news-img" alt="Студенческая жизнь">
+                <div class="news-content">
+                    <div class="card-date">28 мая 2026</div>
+                    <h4 class="card-title">Итоги «Студенческой весны»</h4>
+                    <p class="card-text">Творческая сборная команда нашего института успешно завершила выступления на финальных этапах областного фестиваля. Студенты отделений высшего и среднего профессионального образования заняли заслуженные призовые места в музыкальном и театральном направлениях конкурсной программы.</p>
+                </div>
             </div>
 
-            <div class="news-textbox">
-                <div class="textbox-date">18 мая 2026</div>
-                <div class="textbox-text">Подведены итоги ежегодной Всероссийской научно-практической конференции молодых ученых и студентов, проходившей на базе ЭТИ СГТУ. В секции «Информационные технологии и автоматизация технологических процессов» дипломами первой степени были отмечены доклады, посвященные проектированию локальных сетей и веб-разработке.</div>
-                <a href="https://vk.com/eti_sstu" target="_blank" class="textbox-action">
-                    <span>Перейти к первоисточнику</span>
-                    <span>→</span>
-                </a>
+            <div class="news-card">
+                <img src="https://techn.sstu.ru/images/pages/news_main.jpg" class="news-img" alt="Научная конференция">
+                <div class="news-content">
+                    <div class="card-date">18 мая 2026</div>
+                    <h4 class="card-title">Защита исследовательских проектов</h4>
+                    <p class="card-text">Подведены итоги ежегодной Всероссийской научно-практической конференции молодых ученых и студентов. В рамках секций были заслушаны отчеты студентов первого курса отделений СПО по индивидуальным проектам в области экологии, химии и информационных систем.</p>
+                </div>
             </div>
 
         </div>
