@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ЭТИ СГТУ — Новости</title>
-    <script type="text/javascript" src="https://vk.com/js/api/openapi.js?169"></script>
     <style>
         :root {
             --dark-bg: #0a0f1d;
@@ -19,99 +18,79 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--dark-bg);
-            color: var(--text-main);
+            margin: 0; padding: 0;
+            background-color: var(--dark-bg); color: var(--text-main);
             line-height: 1.6;
         }
 
         header {
             background: linear-gradient(180deg, rgba(19,26,46,1) 0%, rgba(10,15,29,1) 100%);
-            padding: 25px 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 25px 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .header-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 25px;
+            max-width: 1100px; margin: 0 auto;
+            display: flex; flex-direction: column; align-items: center; gap: 25px;
         }
 
-        .logo-container {
-            width: 100%;
-            max-width: 500px;
-            text-align: center;
-        }
-
-        .logo-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 113, 227, 0.2);
-        }
+        .logo-container { width: 100%; max-width: 500px; text-align: center; }
+        .logo-container img { width: 100%; height: auto; display: block; border-radius: 8px; }
 
         nav {
-            display: flex;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 6px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            width: 100%;
-            justify-content: center;
+            display: flex; gap: 8px; background: rgba(255, 255, 255, 0.03);
+            padding: 6px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.07);
+            width: 100%; justify-content: center;
         }
 
         nav a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 0.95rem;
-            padding: 12px 24px;
-            border-radius: 8px;
-            letter-spacing: 0.5px;
+            text-decoration: none; color: var(--text-muted);
+            font-weight: 600; font-size: 0.95rem; padding: 12px 24px; border-radius: 8px;
         }
 
         nav a:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
         nav a.active { background: var(--accent-blue); color: #fff; box-shadow: 0 4px 15px rgba(0, 113, 227, 0.4); }
 
-        main {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
+        main { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
         h2 { color: #fff; font-size: 2.2rem; margin-bottom: 25px; font-weight: 700; }
 
-        /* Контейнер для авто-синхронизируемой ленты */
-        .news-wrapper {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            justify-content: center;
-            width: 100%;
+        #news-container {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px;
         }
 
-        /* Центрирование и адаптивность самого виджета */
-        #vk_groups, #vk_groups iframe {
-            width: 100% !important;
-            border-radius: 12px;
+        .news-card {
+            background: var(--card-bg); border-radius: 16px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex; flex-direction: column;
         }
 
-        /* Автоматическая оптимизация под мобильные телефоны */
+        .news-card:hover { transform: translateY(-5px); border-color: rgba(0, 242, 254, 0.2); }
+        .news-img { width: 100%; height: 210px; object-fit: cover; background: #1a233d; }
+        .news-content { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .news-date { font-size: 0.8rem; color: var(--neon-glow); margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+        
+        .news-text {
+            font-size: 0.95rem; color: var(--text-main); margin-bottom: 20px;
+            display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;
+            overflow: hidden; text-overflow: ellipsis;
+        }
+
+        .news-link {
+            margin-top: auto; text-decoration: none; color: #fff;
+            background: var(--accent-blue); padding: 12px; text-align: center;
+            border-radius: 8px; font-weight: 600; font-size: 0.9rem;
+        }
+
+        .news-link:hover { background: #005bb5; }
+
+        .loader { text-align: center; color: var(--text-muted); font-size: 1.1rem; padding: 50px 0; grid-column: 1 / -1; }
+
         @media (max-width: 768px) {
             nav { flex-direction: column; gap: 4px; }
-            nav a { width: 100%; text-align: center; padding: 12px; }
+            nav a { width: 100%; text-align: center; }
             h2 { font-size: 1.6rem; }
-            .news-wrapper { padding: 10px; border-radius: 12px; }
+            #news-container { grid-template-columns: 1fr; gap: 20px; }
         }
+        footer { background-color: #05070f; color: var(--text-muted); text-align: center; padding: 30px 20px; margin-top: 80px; font-size: 0.85rem; }
     </style>
 </head>
 <body>
@@ -132,9 +111,8 @@
 
     <main>
         <h2>Актуальные события института</h2>
-        
-        <div class="news-wrapper">
-            <div id="vk_groups"></div>
+        <div id="news-container">
+            <div class="loader" id="loader">Автоматическая синхронизация ленты...</div>
         </div>
     </main>
 
@@ -142,23 +120,67 @@
         <p>© 2026 ЭТИ (филиал) СГТУ им. Гагарина Ю.А. Официальный академический ресурс.</p>
     </footer>
 
-    <script type="text/javascript">
-        // Функция инициализации динамической ленты
-        function initVKWidget() {
-            if (typeof VK !== 'undefined' && VK.Widgets && VK.Widgets.Group) {
-                VK.Widgets.Group("vk_groups", {
-                    mode: 4,           // Режим 4 выводит только чистую ленту новостей (стену) без списка участников
-                    width: "auto",     // Автоматическое растягивание по ширине родительского блока (важно для мобилок)
-                    height: "700",     // Высота блока скроллинга новостей
-                    color1: '131A2E',  // Цвет фона виджета (синхронизирован с нашим --card-bg)
-                    color2: 'F5F6F9',  // Цвет текста новостей (синхронизирован с --text-main)
-                    color3: '0071E3'   // Цвет ссылок и инфо-элементов (наш --accent-blue)
-                }, 537397);            // ID публичной страницы ЭТИ СГТУ (vk.com/eti_sstu)
+    <script>
+        // Callback-функция, которая обрабатывает пришедшие данные
+        function processVkNews(data) {
+            const container = document.getElementById('news-container');
+            const loader = document.getElementById('loader');
+            
+            if (!data || !data.response || !data.response.items) {
+                loader.innerHTML = "Лента временно недоступна. Пожалуйста, зайдите позже.";
+                return;
             }
+
+            loader.style.display = 'none';
+            const items = data.response.items;
+
+            items.forEach(post => {
+                if (!post.text && !post.attachments) return;
+
+                const card = document.createElement('div');
+                card.className = 'news-card';
+
+                // Дата
+                const dateObj = new Date(post.date * 1000);
+                const dateStr = dateObj.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+
+                // Картинка
+                let imgUrl = '';
+                if (post.attachments) {
+                    const photo = post.attachments.find(a => a.type === 'photo');
+                    if (photo && photo.photo && photo.photo.sizes) {
+                        const sizes = photo.photo.sizes;
+                        // Ищем оптимальный размер картинки
+                        const size = sizes.find(s => s.type === 'x') || sizes.find(s => s.type === 'm') || sizes[sizes.length - 1];
+                        imgUrl = size.url;
+                    }
+                }
+
+                const imgTag = imgUrl ? `<img src="${imgUrl}" class="news-img" alt="Фото новости">` : '';
+                const postLink = `https://vk.com/wall${post.owner_id}_${post.id}`;
+                // Очищаем внутренние ссылки ВК вида [id123|Имя]
+                const cleanText = post.text ? post.text.replace(/\[(id|club).*?\|(.*?)\]/g, '$2') : 'Смотрите медиаматериалы по ссылке.';
+
+                card.innerHTML = `
+                    ${imgTag}
+                    <div class="news-content">
+                        <div class="news-date">${dateStr}</div>
+                        <div class="news-text">${cleanText}</div>
+                        <a href="${postLink}" target="_blank" class="news-link">Читать в оригинале</a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
         }
 
-        // Запуск генерации после полной загрузки объектной модели страницы
-        window.addEventListener('DOMContentLoaded', initVKWidget);
+        // Запрос к API через JSONP скрипт (работает без CORS на любых хостингах и локально)
+        (function() {
+            const script = document.createElement('script');
+            // ID группы ЭТИ СГТУ: 537397 (с минусом для wall.get)
+            const url = "https://api.vk.com/method/wall.get?owner_id=-537397&count=6&access_token=992850909928509099285090269a38f0009992899285090ef818bfa693998f5a6bfa9e1&v=5.131&callback=processVkNews";
+            script.src = url;
+            document.body.appendChild(script);
+        })();
     </script>
 </body>
 </html>
