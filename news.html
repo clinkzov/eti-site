@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ЭТИ СГТУ — Новости</title>
+    <title>ЭТИ СГТУ — Официальные новости</title>
     <style>
         :root {
             --dark-bg: #0a0f1d;
@@ -45,6 +45,7 @@
         nav a {
             text-decoration: none; color: var(--text-muted);
             font-weight: 600; font-size: 0.95rem; padding: 12px 24px; border-radius: 8px;
+            letter-spacing: 0.5px;
         }
 
         nav a:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
@@ -52,77 +53,59 @@
 
         main { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
         
-        /* Блок-призыв к действию (Стриминг-модуль) */
-        .sync-banner {
-            background: radial-gradient(circle at top left, #1e294b, #131a2e);
-            border-radius: 16px; padding: 30px; margin-bottom: 40px;
-            border: 1px solid rgba(0, 242, 254, 0.2);
+        /* Верхний блок-уведомление о первоисточнике */
+        .info-announcement {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px; padding: 25px; margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 15px 35px rgba(0, 242, 254, 0.05);
         }
 
-        .sync-info h3 { margin: 0 0 8px 0; color: #fff; font-size: 1.4rem; }
-        .sync-info p { margin: 0; color: var(--text-muted); font-size: 0.95rem; }
+        .announcement-details h3 { margin: 0 0 6px 0; color: #fff; font-size: 1.3rem; font-weight: 700; }
+        .announcement-details p { margin: 0; color: var(--text-muted); font-size: 0.95rem; }
         
-        .pulse-badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(0, 242, 254, 0.1); color: var(--neon-glow);
-            padding: 4px 12px; border-radius: 20px; font-size: 0.8rem;
-            font-weight: 700; text-transform: uppercase; margin-bottom: 12px;
-            letter-spacing: 0.5px;
-        }
-
-        .pulse-dot {
-            width: 8px; height: 8px; background: var(--neon-glow);
-            border-radius: 50%; animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.9); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.5; }
-            100% { transform: scale(0.9); opacity: 1; }
-        }
-
-        .btn-sync {
+        .source-link {
             text-decoration: none; color: #fff; background: var(--accent-blue);
-            padding: 14px 28px; border-radius: 10px; font-weight: 700;
-            box-shadow: 0 4px 15px rgba(0, 113, 227, 0.3); white-space: nowrap;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            white-space: nowrap; font-size: 0.9rem;
         }
-        .btn-sync:hover { background: #005bb5; transform: translateY(-2px); }
+        .source-link:hover { background: #005bb5; }
 
-        /* Сетка новостей */
+        /* Сетка для текстовых блоков (textbox) */
         .news-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px;
         }
 
-        .news-card {
-            background: var(--card-bg); border-radius: 16px; overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex; flex-direction: column;
+        .news-textbox {
+            background: var(--card-bg); border-radius: 14px; padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex; flex-direction: column; min-height: 300px;
         }
 
-        .news-card:hover { transform: translateY(-5px); border-color: rgba(0, 242, 254, 0.2); }
-        .news-img { width: 100%; height: 210px; object-fit: cover; }
-        .news-content { padding: 22px; display: flex; flex-direction: column; flex-grow: 1; }
-        .news-date { font-size: 0.8rem; color: var(--neon-glow); margin-bottom: 12px; letter-spacing: 1px; font-weight: 600; }
-        .news-title { font-size: 1.15rem; color: #fff; margin: 0 0 10px 0; font-weight: 700; }
-        .news-text { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; }
-
-        .news-link {
-            margin-top: auto; text-decoration: none; color: var(--text-main);
-            background: rgba(255,255,255,0.04); padding: 12px; text-align: center;
-            border-radius: 8px; font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.05);
+        .news-textbox:hover { 
+            border-color: rgba(0, 242, 254, 0.2); 
+            box-shadow: 0 12px 35px rgba(0, 242, 254, 0.05);
         }
-        .news-link:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        
+        .textbox-date { font-size: 0.8rem; color: var(--neon-glow); margin-bottom: 12px; letter-spacing: 1px; font-weight: 600; text-transform: uppercase; }
+        .textbox-text { font-size: 0.95rem; color: var(--text-main); margin-bottom: 20px; line-height: 1.6; text-align: justify; flex-grow: 1; }
 
+        .textbox-action {
+            text-decoration: none; color: var(--text-muted); font-size: 0.85rem;
+            font-weight: 600; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 12px;
+            display: inline-flex; align-items: center; justify-content: space-between;
+        }
+        .textbox-action:hover { color: #fff; }
+
+        /* Оптимизация под мобильные телефоны */
         @media (max-width: 768px) {
             nav { flex-direction: column; gap: 4px; }
-            nav a { width: 100%; text-align: center; }
-            .sync-banner { flex-direction: column; text-align: center; gap: 20px; padding: 20px; }
-            .btn-sync { width: 100%; }
+            nav a { width: 100%; text-align: center; padding: 12px; }
+            .info-announcement { flex-direction: column; text-align: center; gap: 20px; }
+            .source-link { width: 100%; }
             .news-grid { grid-template-columns: 1fr; gap: 20px; }
         }
-        footer { background-color: #05070f; color: var(--text-muted); text-align: center; padding: 30px 20px; margin-top: 80px; font-size: 0.85rem; }
+        footer { background-color: #05070f; color: var(--text-muted); text-align: center; padding: 30px 20px; margin-top: 80px; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.02); }
     </style>
 </head>
 <body>
@@ -133,56 +116,52 @@
                 <img src="https://lh5.googleusercontent.com/proxy/Np35Go7GCO1S3sTQyDR7W7uH_HahaG17E_zWn0Pouec2dVHYo44QTrf4IZ8AlFRQqAwMhvlyH_AWIPqZ-iJ0UgYxw-X0lBVuHXTuKE8G" alt="Логотип ЭТИ СГТУ">
             </div>
             <nav>
-                <a href="index.html">Main</a>
-                <a href="specialties.html">Specialties</a>
-                <a href="news.html" class="active">News</a>
-                <a href="contacts.html">Contacts</a>
+                <a href="index.html">Главная</a>
+                <a href="specialties.html">Специальности</a>
+                <a href="news.html" class="active">Новости</a>
+                <a href="contacts.html">Контакты</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <div class="sync-banner">
-            <div class="sync-info">
-                <div class="pulse-badge">
-                    <span class="pulse-dot"></span> live stream
-                </div>
-                <h3>Синхронизация с медиа-потоком</h3>
-                <p>Все официальные приказы, изменения в расписании и студенческие события транслируются напрямую.</p>
+        <div class="info-announcement">
+            <div class="announcement-details">
+                <h3>Официальный информационный источник</h3>
+                <p>Актуальные сведения о внутренних мероприятиях, нормативных актах и учебном процессе ЭТИ СГТУ.</p>
             </div>
-            <a href="https://vk.com/eti_sstu" target="_blank" class="btn-sync">Открыть ленту VK</a>
+            <a href="https://vk.com/eti_sstu" target="_blank" class="source-link">Перейти в группу VK</a>
         </div>
 
         <div class="news-grid">
-            <div class="news-card">
-                <img src="https://sun9-59.userapi.com/s/v1/ig2/PWWzPmvaVWQE1xqa2F48Hx2-CYoEyjt5ZsvpxOt5Kfx6g4WuQQoq9T85jNkHcauJwiypM37zeSI2ANc4Gss4YnmM.jpg?quality=95&as=32x18,48x27,72x40,108x61,160x90,240x135,360x202,480x270,540x304,640x360,720x405,1080x607,1280x720&from=bu&cs=1280x0" class="news-img" alt="Новость">
-                <div class="news-content">
-                    <div class="news-date">Июнь 2026</div>
-                    <h4 class="news-title">Приемная кампания 2026</h4>
-                    <p class="news-text">Старт приема документов на программы высшего и среднего профессионального образования (СПО). Подайте заявление онлайн или лично.</p>
-                    <a href="https://vk.com/eti_sstu" target="_blank" class="news-link">Подробнее</a>
-                </div>
+            
+            <div class="news-textbox">
+                <div class="textbox-date">10 июня 2026</div>
+                <div class="textbox-text">Приемная комиссия Энгельсского технологического института информирует о готовности к началу приема заявлений от абитуриентов. С 20 июня начинается официальный прием документов на программы среднего профессионального образования (СПО) и высшего образования. Доступна подача заявлений через личный кабинет на сайте СГТУ и портал «Госуслуги».</div>
+                <a href="https://vk.com/eti_sstu" target="_blank" class="textbox-action">
+                    <span>Перейти к первоисточнику</span>
+                    <span>→</span>
+                </a>
             </div>
 
-            <div class="news-card">
-                <img src="https://sun9-77.userapi.com/s/v1/ig2/0qMcMSshNiv-4OvI9yPfxRjmG6-tuBZ0c9zgCdmSPmrscma0q76rl-UfyRle5reXvQmyZytIpCGTZOklBbAQw-WC.jpg?quality=95&as=32x21,48x32,72x48,108x72,160x107,240x160,360x240,480x320,540x360,640x427,720x480,1080x720,1280x853,1440x960,2560x1707&from=bu&cs=2560x0" class="news-img" alt="Новость">
-                <div class="news-content">
-                    <div class="news-date">Май 2026</div>
-                    <h4 class="news-title">Студенческая весна</h4>
-                    <p class="news-text">Творческие коллективы нашего института заняли призовые места на региональном этапе фестиваля. Поздравляем участников!</p>
-                    <a href="https://vk.com/eti_sstu" target="_blank" class="news-link">Подробнее</a>
-                </div>
+            <div class="news-textbox">
+                <div class="textbox-date">25 мая 2026</div>
+                <div class="textbox-text">Студенты первого курса отделений СПО успешно завершили цикл промежуточных отчетов по индивидуальным исследовательским проектам. Особое внимание в рамках экспертных сессий было уделено работам в области прикладной экологии, промышленной химии и современным методам утилизации твердых коммунальных отходов.</div>
+                <a href="https://vk.com/eti_sstu" target="_blank" class="textbox-action">
+                    <span>Перейти к первоисточнику</span>
+                    <span>→</span>
+                </a>
             </div>
 
-            <div class="news-card">
-                <img src="https://avatars.mds.yandex.net/get-altay/16771051/2a0000019ab937d1c72fdcd6a720e0eaad3f/XXXL" class="news-img" alt="Новость">
-                <div class="news-content">
-                    <div class="news-date">Май 2026</div>
-                    <h4 class="news-title">Научно-практическая конференция</h4>
-                    <p class="news-text">В ЭТИ СГТУ прошли ежегодные слушания докладов молодых ученых и студентов СПО в секциях экологии и информационных технологий.</p>
-                    <a href="https://vk.com/eti_sstu" target="_blank" class="news-link">Подробнее</a>
-                </div>
+            <div class="news-textbox">
+                <div class="textbox-date">18 мая 2026</div>
+                <div class="textbox-text">Подведены итоги ежегодной Всероссийской научно-практической конференции молодых ученых и студентов, проходившей на базе ЭТИ СГТУ. В секции «Информационные технологии и автоматизация технологических процессов» дипломами первой степени были отмечены доклады, посвященные проектированию локальных сетей и веб-разработке.</div>
+                <a href="https://vk.com/eti_sstu" target="_blank" class="textbox-action">
+                    <span>Перейти к первоисточнику</span>
+                    <span>→</span>
+                </a>
             </div>
+
         </div>
     </main>
 
