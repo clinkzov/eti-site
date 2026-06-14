@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЭТИ СГТУ — Контакты</title>
+    <style>
+        :root { --dark-bg: #0a0f1d; --card-bg: #131a2e; --accent-blue: #0071e3; --neon-glow: #00f2fe; --text-main: #f5f6f9; --text-muted: #8a99a8; }
+        * { box-sizing: border-box; transition: all 0.25s ease; }
+        body { font-family: -apple-system, sans-serif; margin: 0; background-color: var(--dark-bg); color: var(--text-main); }
+        header { background: linear-gradient(180deg, rgba(19,26,46,1) 0%, rgba(10,15,29,1) 100%); padding: 25px 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .header-container { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 25px; }
+        .logo-container { width: 100%; max-width: 500px; text-align: center; }
+        .logo-container img { width: 100%; height: auto; display: block; border-radius: 8px; }
+        nav { display: flex; gap: 8px; background: rgba(255, 255, 255, 0.03); padding: 6px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.07); width: 100%; justify-content: center; }
+        nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; padding: 12px 24px; border-radius: 8px; }
+        nav a:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
+        nav a.active { background: var(--accent-blue); color: #fff; box-shadow: 0 4px 15px rgba(0, 113, 227, 0.4); }
+        main { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        h2 { color: #fff; font-size: 2.2rem; margin-bottom: 25px; }
+        
+        /* Сетка контактов и карты */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .info-card { background: var(--card-bg); padding: 35px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid rgba(255, 255, 255, 0.05); border-left: 4px solid var(--accent-blue); }
+        .map-card { background: var(--card-bg); padding: 8px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid rgba(255, 255, 255, 0.05); height: 420px; overflow: hidden; }
+        .info-item { margin-bottom: 25px; }
+        .info-item h3 { margin: 0 0 6px 0; color: var(--neon-glow); font-size: 1.1rem; font-weight: 600; }
+        .info-item p { margin: 0; color: var(--text-muted); }
+        .info-item p strong { color: #fff; }
+        
+        @media (max-width: 768px) {
+            nav { flex-direction: column; gap: 4px; }
+            nav a { width: 100%; text-align: center; }
+            h2 { font-size: 1.6rem; }
+            .contact-grid { grid-template-columns: 1fr; gap: 15px; }
+            .map-card { height: 320px; }
+        }
+        footer { background-color: #05070f; color: var(--text-muted); text-align: center; padding: 30px 20px; margin-top: 80px; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="https://lh5.googleusercontent.com/proxy/Np35Go7GCO1S3sTQyDR7W7uH_HahaG17E_zWn0Pouec2dVHYo44QTrf4IZ8AlFRQqAwMhvlyH_AWIPqZ-iJ0UgYxw-X0lBVuHXTuKE8G" alt="Логотип ЭТИ СГТУ">
+            </div>
+            <nav>
+                <a href="index.html">Главная</a>
+                <a href="specialties.html">Специальности</a>
+                <a href="news.html">Новости</a>
+                <a href="contacts.html" class="active">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h2>Контакты и интерактивная карта</h2>
+        <div class="contact-grid">
+            <div class="info-card">
+                <div class="info-item">
+                    <h3>Адресация:</h3>
+                    <p>413116, Саратовская область, г. Энгельс, площадь Свободы, д. 17</p>
+                </div>
+                <div class="info-item">
+                    <h3>Приемная комиссия:</h3>
+                    <p>Телефон: <strong>+7 (8453) 56-85-44</strong></p>
+                    <p>E-mail: <strong>pr_techn@sstu.ru</strong></p>
+                </div>
+                <div class="info-item">
+                    <h3>Директорат:</h3>
+                    <p>Телефон: <strong>+7 (8453) 55-75-00</strong></p>
+                </div>
+                <div class="info-item">
+                    <h3>Временной регламент:</h3>
+                    <p>Понедельник – Пятница: с 8:30 до 17:00</p>
+                    <p>Выходные дни: Суббота, Воскресенье</p>
+                </div>
+            </div>
+            <div class="map-card">
+                <iframe src="https://yandex.ru/map-widget/v1/?ll=46.121516%2C51.501524&mode=search&oid=1092823654&ol=biz&z=16" width="100%" height="100%" frameborder="0" allowfullscreen="true" style="position:relative; border:0; border-radius: 10px; filter: invert(90%) hue-rotate(180deg) contrast(120%);"></iframe>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ЭТИ (филиал) СГТУ им. Гагарина Ю.А. Официальный академический ресурс.</p>
+    </footer>
+
+</body>
+</html>
